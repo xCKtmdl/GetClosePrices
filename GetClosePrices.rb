@@ -11,15 +11,10 @@
 # a stock's YF page for the csv download link.
 # The link gets placed into a input file for casperjs
 # (I ran into problems passing it from here as a command line
-# argument to casperjs. Fuckin thing wants to open the url
-# as a script for some reason)
+# argument to casperjs. For some reason it tries to open it
+# as a script)
 # and then the casperjs script GetClosePrices.js reads the
 # input file for the csv download url.
-
-# It may seem all-over-the-place.
-# I'd love to see someone else's better solution
-# (at least for what I ultimately have in mind).
-
 
 # functions used from aux.rb: run, DelFiles
 # run - executes shell commands
@@ -63,5 +58,7 @@ fileString =~ /<a href="([^"]+)csv"/
 href = $1 + "csv"
 
 file1=File.open('casperInput.txt', 'w')
+
+# input file to casper is expected to be input line, \n, delimited
 file1.puts curlURL + "\n" + href
 
